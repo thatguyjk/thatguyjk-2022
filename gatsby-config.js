@@ -8,6 +8,7 @@ module.exports = {
     title: "portfolio site 2022",
   },
   plugins: [
+    "gatsby-plugin-transition-link",
     {
       resolve: "gatsby-plugin-env-variables",
       options: {
