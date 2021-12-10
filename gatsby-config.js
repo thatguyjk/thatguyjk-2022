@@ -4,10 +4,19 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://www.yourdomain.tld",
-    title: "portfolio site 2022",
+    siteUrl: "https://www.thatguyjk.dev",
+    title: "The 2022 portfolio website of Jonathan Kelly",
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-google-fonts`,
+      options: {
+        fonts: [
+          `Roboto Mono`
+        ],
+        display: 'swap'
+      }
+    },
     "gatsby-plugin-transition-link",
     {
       resolve: "gatsby-plugin-env-variables",
