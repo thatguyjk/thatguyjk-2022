@@ -1,0 +1,40 @@
+.titleContainer {
+    background-color: #ffffff;
+    backdrop-filter: blur(10px) opacity(0.8);
+
+    display: grid;
+    grid-template-rows: 1fr minmax(150px, 300px);
+    grid-gap: 0.5em;
+    justify-items: center;
+
+    grid-column: 1 / 13;
+    height: 100vh;
+
+    @media screen and (min-width: 769px) {
+        grid-gap: 1em;
+        grid-column: 1 / 7;
+        grid-template-rows: 1fr minmax(100px, 200px);
+        justify-items: end;
+    }
+
+    .logoGroup {
+        display: flex;
+        flex-direction: column;
+
+        h1 {
+            font-family: 'Roboto Mono', sans-serif;
+            font-size: calc((100vh - 150px) / 4);
+            margin: 0;
+            line-height: 0.9;
+
+            @media screen and (min-width: 769px) {
+                line-height: 0.85;
+                font-size: calc((100vh) / 4);
+            }
+        }
+    }
+
+    .description {
+        padding: 0 1em;
+    }
+}

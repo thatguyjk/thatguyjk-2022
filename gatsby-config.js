@@ -31,7 +31,13 @@ module.exports = {
         spaceId: process.env.CONTENTFUL_SPACE_ID,
       },
     },
-    "gatsby-plugin-sass",
+    {
+      resolve: `gatsby-plugin-sass`,
+      options: {
+        postCssPlugins: [
+        ],
+      },
+    },
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {
