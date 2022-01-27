@@ -12,7 +12,7 @@ module.exports = {
       resolve: `gatsby-plugin-google-fonts`,
       options: {
         fonts: [
-          `Roboto Mono`
+          `Roboto Mono`, `Lora`
         ],
         display: 'swap'
       }

@@ -1,15 +1,12 @@
 import React from 'react';
 import './title.scss';
 
-const Title = ({name, description}) => {
+const Title = ({name}) => {
     return (
-        <div className="titleContainer">
-            <figure className='logoGroup'>
-                <h1>THT</h1>
-                <h1>GUY</h1>
-                <h1>JK.</h1>
-            </figure>
-            <p className='description'>{description}</p>        
+        <div className="titleContainer">           
+            <span>THT</span>
+            <span>GUY</span>
+            <span>JK.</span>
         </div>
     );
 }

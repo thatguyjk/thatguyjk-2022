@@ -1,0 +1,15 @@
+nav {
+    grid-column-start: 1;
+    grid-column-end: 13;
+    grid-row: 1;
+    z-index: 1;
+    
+    @media screen and (min-width: 768px) {
+        padding: 1em 0;
+        width: 50%;
+        display: flex;
+        justify-content: space-evenly;
+        position: fixed;
+        justify-self: end;
+    }
+}

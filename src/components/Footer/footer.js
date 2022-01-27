@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "gatsby"
 import { useStaticQuery, graphql } from "gatsby"
 
-import './nav.scss';
+import './footer.scss';
 
 const NavList = ({listData}) => {
     return listData ? (
@@ -34,10 +34,10 @@ const NavList = ({listData}) => {
     ) : null;
 }
 
-const Nav = () => {
+const Footer = () => {
     const navData = useStaticQuery(graphql`
     {
-      allContentfulPageNavigationList(filter: {navigationName: {eq: "headerNav"}}) {
+      allContentfulPageNavigationList(filter: {navigationName: {eq: "footerNav"}}) {
         edges {
           node {
             navigationList {
@@ -63,11 +63,11 @@ const Nav = () => {
     }`);
 
     return (
-        <nav>
+        <footer>
             <NavList listData={navData.allContentfulPageNavigationList.edges[0].node.navigationList} />
-        </nav>
+        </footer>
     );
 }
 
 // use gatsby api to pull in contentful data
-export default Nav;
+export default Footer;
