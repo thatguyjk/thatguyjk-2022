@@ -10,7 +10,7 @@ export default function Footer({ navLinks }) {
     const fetchFooterLinks = async () => {
       const footerLinks = await getFooterLinks();
 
-      footerLinks.forEach(link => {
+      footerLinks && footerLinks.forEach(link => {
         delete link['metadata'];
         delete link['sys'];
         delete link['fields']['navItemLogo']['metadata'];
@@ -23,14 +23,10 @@ export default function Footer({ navLinks }) {
     fetchFooterLinks();
   }, []);
 
-  useEffect(() => {
-    console.log(footerNavLinks);
-  }, [footerNavLinks]);
-
   return (
     <>
       <footer>
-        {footerNavLinks.map((navLink) => {
+        {footerNavLinks && footerNavLinks.map((navLink) => {
           return (
             <Link
               href={navLink.fields.navItemUrl}

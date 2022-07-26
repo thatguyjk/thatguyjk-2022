@@ -10,7 +10,7 @@ export default function Header() {
     const fetchHeaderLinks = async () => {
       const headerLinks = await getHeaderLinks();
 
-      headerLinks.forEach((link) => {
+      headerLinks && headerLinks.forEach((link) => {
         delete link["metadata"];
         delete link["sys"];
        // delete link["fields"]["navItemLogo"]["metadata"];
@@ -22,10 +22,6 @@ export default function Header() {
 
     fetchHeaderLinks();
   }, []);
-
-  useEffect(() => {
-    console.log(headerNavLinks);
-  }, [headerNavLinks]);
 
   return (
     <>
