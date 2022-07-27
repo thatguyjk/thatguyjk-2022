@@ -1,26 +1,28 @@
-import {useEffect } from 'react';
+import { useEffect } from 'react';
+import Link from 'next/link';
 import { getAllProjects } from '../../lib/api';
 
 function Projects({projects}) {
-
     useEffect(() => {
-        console.log('projects:', projects);
+        console.log(projects);
     }, [projects]);
 
     return (
         <>
         <h1>Projects</h1>
-        {/* <ul>
+        <ul>
             {
-                project.map((project, projectKey) => {
+                projects && projects.map((project, index) => {
                     return (
-                        <li key={projectKey}>
-                            {project.fields.title}
-                        </li>
+                      <li key={index}>
+                        <Link href={`/projects/${project.fields.slug}`}>
+                          {project.fields.title}
+                        </Link>
+                      </li>
                     );
                 })
             }
-        </ul> */}
+        </ul>
         </>
     );
 }
