@@ -9,7 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "contentful": "^9.1.32",
+    "@contentful/rich-text-html-renderer": "^15.13.1",
+    "contentful": "^9.1.33",
     "dotenv": "^16.0.1",
     "image-trace-loader": "^1.0.2",
     "imagemin-gifsicle": "^7.0.0",
