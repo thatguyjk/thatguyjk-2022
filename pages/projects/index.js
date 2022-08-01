@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import Head from 'next/head';
 import Link from 'next/link';
 import { getAllProjects } from '../../lib/api';
 
@@ -9,6 +10,9 @@ function Projects({projects}) {
 
     return (
         <>
+        <Head>
+            <title>ThatGuyJK - Projects</title>
+        </Head>
         <h1>Projects</h1>
         <ul>
             {

@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build && next export",
-    "start": "next start",
+    "dev": "node lib/dlAssets.js && next dev",
+    "build": "node lib/dlAssets.js && next build && next export",
+    "start": "node lib/dlAssets.js && next start",
     "lint": "next lint"
   },
   "dependencies": {
