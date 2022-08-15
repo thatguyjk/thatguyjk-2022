@@ -1,7 +1,28 @@
-import Head from 'next/head'
+import {useState, useEffect} from 'react';
+import Head from 'next/head';
+import Link from 'next/link';
+import { getFeaturedProjects } from "../lib/api";
 import styles from '../styles/Home.module.scss'
 
-export default function Home() {
+export default function Home({featuredProjects}) {
+  const [featured, setFeatured] = useState([]);
+
+  useEffect(() => {
+    setFeatured(featuredProjects);
+    console.log('featured', featuredProjects);
+  }, [featuredProjects]);
+
+  const FeaturedProject = ({details}) => {
+    return  (
+      <div style={{
+        color: '#ffffff',
+        background: details.fields.primaryColor
+      }}>
+        <Link href={'projects/'+details.fields.slug}>{details.fields.title}</Link>
+      </div>
+    )
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -11,36 +32,25 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
         <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
+          { featured.map((prj, index) => {
+              return (
+                <FeaturedProject details={prj} key={index} />
+              );
+            }) 
+          }
         </div>
       </main>
     </div>
   )
+}
+
+export async function getStaticProps() {
+  const featuredProjects = await getFeaturedProjects();
+
+  return {
+    props: {
+      featuredProjects,
+    },
+  };
 }

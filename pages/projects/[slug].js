@@ -3,15 +3,33 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { getAllProjects } from "../../lib/api";
+import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
 
 export default function Project({project}) {
     const [createdAt, setCreatedAt] = useState("");
-    const [description, setDescription] = useState("");
+    const [description, setDescription] = useState(null);
     const [techStack, setTechStack] = useState([]);
     const [title, setTitle] = useState([]);
     const [url, setUrl] = useState("");
     const [projectImages, setImages] = useState([]);
+    
+    const Bold = ({children}) => <b>{children}</b>;
+    const Text = ({children}) => <p>{children}</p>;
+    const Italic = ({children}) => <em>{children}</em>
+    const Code = ({children}) => <code>{children}</code>
 
+    const options = {
+      renderMark: {
+        [MARKS.BOLD]: text => <Bold>{ text }</Bold>,
+        [MARKS.ITALIC]: text => <Italic>{ text }</Italic>,
+        [MARKS.CODE]: text => <Code>{ text }</Code>
+      },
+      renderNode: {
+        [BLOCKS.PARAGRAPH]: (node, children) => <Text>{ children }</Text>,
+        [INLINES.HYPERLINK]: ({data}, children) => <a href={data.uri} target="_blank" rel="noopener noreferrer">{children}</a>
+      }
+    }
     useEffect(() => {
       setCreatedAt(project.fields?.createdAt);
       setDescription(project.fields?.description);
@@ -28,7 +46,7 @@ export default function Project({project}) {
         </Head>
         <h1>{title}</h1>
         <p>{createdAt}</p>
-        <p>{description}</p>
+        {documentToReactComponents(description, options)}
         <ul>
           {techStack.map((tech, id) => {
             return <li key={id}>{tech}</li>;
