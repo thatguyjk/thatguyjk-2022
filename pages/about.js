@@ -7,7 +7,9 @@ function About({projects, aboutContent}) {
         <Head>
           <title>ThatGuyJK - About</title>
         </Head>
-        <h1>About Page</h1>
+        <article className='min-h-screen'>
+          About page
+        </article>
       </>
     );
 }

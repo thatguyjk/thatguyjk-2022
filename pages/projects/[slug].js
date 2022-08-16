@@ -44,34 +44,57 @@ export default function Project({project}) {
         <Head key='title'>
           <title>ThatGuyJK - Projects - {title}</title>
         </Head>
-        <h1>{title}</h1>
-        <p>{createdAt}</p>
-        {documentToReactComponents(description, options)}
-        <ul>
-          {techStack.map((tech, id) => {
-            return <li key={id}>{tech}</li>;
-          })}
-        </ul>
+        <article className='translate-y-16 min-h-screen'>
+          <section className='mb-6'>
+            <h1 className='font-roboto text-4xl md:text-5xl'>{title}</h1>
+          </section>
 
-        <a href={url} target='_blank' rel='noreferrer'>
-          {url}
-        </a>
+          <section className='grid gap-3 md:grid-cols-2'>
+            <div className='font-nunito'>
+            {documentToReactComponents(description, options)}
+            </div>
 
-        <ul>
+            <div className='grid auto-rows-auto gap-4 font-nunito'>
+              <div>
+                <h6 className='underline underline-offset-4 text-xl font-bold'>Created At</h6>
+                <p className='text-lg'>{createdAt}</p>
+              </div>
+
+              <div>
+                <h6 className='underline underline-offset-4 text-xl font-bold'>Technology Used</h6>
+                <ul>
+                  {techStack.map((tech, id) => {
+                    return <li key={id} className='text-sm font-semibold bg-olive p-1 rounded inline-block mr-2'>{tech}</li>;
+                  })}
+                </ul>
+              </div>
+
+              <div>
+                <h6 className='underline underline-offset-4 text-xl font-bold'>Project URL</h6>
+                <a href={url} target='_blank' rel='noreferrer'>
+                  {url}
+                </a>
+              </div>
+            </div>
+          </section>
+          
+          <section className='grid grid-cols-1 gap-2 md:grid-cols-2'>
           {projectImages.map((prjImg, imgId) => {
-            return (
-              <li key={imgId}>
-                <Image
-                  src={"/" + prjImg.fields?.file.fileName}
-                  alt={prjImg.fields?.title}
-                  layout='intrinsic'
-                  width={prjImg.fields?.file?.details?.image?.width}
-                  height={prjImg.fields?.file?.details?.image?.height}
-                />
-              </li>
-            );
-          })}
-        </ul>
+              return (
+                <figure key={imgId}>
+                  <Image
+                    src={"/" + prjImg.fields?.file.fileName}
+                    alt={prjImg.fields?.title}
+                    layout='intrinsic'
+                    width={prjImg.fields?.file?.details?.image?.width}
+                    height={prjImg.fields?.file?.details?.image?.height}
+                  />
+                </figure>
+              );
+            })}
+          </section>          
+        </article>
+
       </>
     );
 }
