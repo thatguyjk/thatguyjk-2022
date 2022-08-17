@@ -23,7 +23,7 @@ export async function getStaticProps() {
 
   const aboutData = await getAboutContent();
 
-  console.log(aboutData.content[0]);
+  // console.log(aboutData.content[0]);
 
   return {
       props: {

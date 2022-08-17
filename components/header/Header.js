@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-// import { Container, Row, Col } from 'react-grid-system';
+import { useRouter } from 'next/router';
 import { getHeaderLinks } from "../../lib/api";
 import styles from './Header.module.scss';
 
 export default function Header() {
   const [headerNavLinks, setHeaderNavLinks] = useState([]);
+  const [currRoute, setCurrRoute] = useState('');
+  const router = useRouter();
 
   useEffect(() => {
     const fetchHeaderLinks = async () => {
@@ -15,8 +17,6 @@ export default function Header() {
       headerLinks && headerLinks.forEach((link) => {
         delete link["metadata"];
         delete link["sys"];
-       // delete link["fields"]["navItemLogo"]["metadata"];
-       // delete link["fields"]["navItemLogo"]["sys"];
       });
 
       setHeaderNavLinks(headerLinks);
@@ -25,16 +25,26 @@ export default function Header() {
     fetchHeaderLinks();
   }, []);
 
+  useEffect(() => {
+    setCurrRoute(router.pathname);
+  }, [router]);
+
+  const matchingPath = (linkName) => {
+    if(currRoute === '/' && linkName === 'Home') return true;
+
+    return currRoute.includes(linkName.toLowerCase());
+  }
+
   return (
     <>
-      <nav className="bg-offwhite backdrop-blur-sm backdrop-opacity-30 fixed z-40 w-full shadow-lg mb-3.5 grid grid-rows-1 grid-cols-2 grid-flow-row-dense items-center px-12">
+      <nav className="bg-black/90 text-white backdrop-blur-md backdrop-opacity-60 fixed z-40 w-full shadow-lg mb-3.5 grid grid-rows-1 grid-cols-2 grid-flow-row-dense items-center px-12">
         <div className="justify-self-start font-nunito font-extrabold uppercase"><Link href="/">THATGUYJK</Link></div>
-        <div className="grid grid-cols-3 gap-3 justify-self-end">
+        <div className={'grid grid-cols-'+ headerNavLinks.length +' gap-3 justify-self-end'}>
           {headerNavLinks.map((navLink) => {
             return (
               <div className="inline-block py-3 font-nunito" key={navLink.fields.navItemName}>
                 <Link href={navLink.fields.navItemUrl}>
-                  <a className="hover:text-bluegrey active:text-red">
+                  <a className={matchingPath(navLink.fields.navItemName) ? 'text-red' : 'text-white hover:text-red'}>  
                     {navLink.fields?.navItemLogo?.fields?.file?.fileName ? (
                       <Image
                         src={
