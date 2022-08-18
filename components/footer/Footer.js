@@ -39,20 +39,14 @@ export default function Footer({ navLinks }) {
               >
                 <a className="mr-2 inline-block">
                   {navLink.fields?.navItemLogo?.fields?.file?.fileName ? (
-                    <Image
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
                       src={
                         "/" +
                         navLink.fields.navItemLogo.fields.file.fileName
                       }
-                      alt={navLink.fields.navItemLogo.fields.title}
-                      width={
-                        navLink.fields.navItemLogo.fields.file.details
-                          .image.width / 16
-                      }
-                      height={
-                        navLink.fields.navItemLogo.fields.file.details
-                          .image.height / 16
-                      }      
+                      alt={navLink.fields.navItemLogo.fields.title} 
+                      className="h-8 w-auto"  
                     />
                   ) : null}
                 </a>

@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node lib/dlAssets.js && next dev",
+    "assets": "node lib/dlAssets.js",
+    "dev": "next dev",
     "build": "node lib/dlAssets.js && next build && next export",
     "start": "node lib/dlAssets.js && next start",
     "lint": "next lint"
@@ -31,6 +32,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.8",
+    "cssnano": "^5.1.13",
     "eslint": "8.15.0",
     "eslint-config-next": "12.1.6",
     "postcss": "^8.4.16",

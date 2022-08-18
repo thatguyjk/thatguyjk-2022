@@ -24,15 +24,16 @@ export default function Project({project}) {
 
     const options = {
       renderMark: {
-        [MARKS.BOLD]: text => <Bold>{ text }</Bold>,
-        [MARKS.ITALIC]: text => <Italic>{ text }</Italic>,
-        [MARKS.CODE]: text => <Code>{ text }</Code>
+        [MARKS.BOLD]: text => <Bold classes="">{ text }</Bold>,
+        [MARKS.ITALIC]: text => <Italic classes="">{ text }</Italic>,
+        [MARKS.CODE]: text => <Code classes="">{ text }</Code>
       },
       renderNode: {
-        [BLOCKS.PARAGRAPH]: (node, children) => <Text>{ children }</Text>,
-        [INLINES.HYPERLINK]: ({data}, children) => <a href={data.uri} target="_blank" rel="noopener noreferrer">{children}</a>
+        [BLOCKS.PARAGRAPH]: (node, children) => <Text classes="text-2xl mb-4">{ children }</Text>,
+        [INLINES.HYPERLINK]: ({data}, children) => <a className="text-red" href={data.uri} target="_blank" rel="noopener noreferrer">{children}</a>
       }
     }
+
     useEffect(() => {
       setCreatedAt(project.fields?.createdAt);
       setProjectYear(project.fields?.projectYear);
@@ -42,10 +43,6 @@ export default function Project({project}) {
       setUrl(project.fields?.url);
       setImages(project.fields?.projectImages);
     }, [project]);
-
-    useEffect(() => {
-
-    }, []);
 
     return (
       <>

@@ -9,7 +9,7 @@ function Projects({projects}) {
             <title>ThatGuyJK - Projects</title>
         </Head>
         <article className='py-16 min-h-screen'>
-            <h1 className='mb-8 font-roboto text-4xl md:text-5xl'>Featured Projects</h1>
+            <h5 className='mb-8 font-nunito text-4xl'>Featured Projects</h5>
             <ul className='grid grid-cols-1 md:grid-cols-2 justify-items-center items-center'>
                 {
                     projects && projects.map((project, index) => {
