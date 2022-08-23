@@ -44,7 +44,7 @@ function About({aboutContent}) {
 export async function getStaticProps() {
   const aboutData = await getAboutContent();
 
-  console.log(aboutData);
+  //console.log(aboutData);
 
   return {
       props: {
