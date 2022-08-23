@@ -1,0 +1,19 @@
+.container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+
+    .socialImage {
+        display: inline-block;
+        margin-left: 2em;
+        margin-right: 2em;
+
+        &:nth-child(1) {
+            margin-left: 0;
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}

@@ -7,10 +7,6 @@ For this years iteration of my website I am looking forward to showcasing a lot 
 #### Technology used in the creation of this website
 
 - React/NextJS
-- ThreeJS
-- CablesGL
-- ethers.js
-    > This is for the blockchain functionality mentioned above
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
