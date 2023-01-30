@@ -34,24 +34,24 @@ export default function Footer({ navLinks }) {
           footerNavLinks.map((navLink) => {
             return (
               <Link
+                legacyBehavior
                 href={navLink.fields.navItemUrl}
                 key={navLink.fields.navItemName + "-footer-link"}
               >
-                <a className="mr-2 inline-block">
+                <a className='mr-2 inline-block'>
                   {navLink.fields?.navItemLogo?.fields?.file?.fileName ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={
-                        "/" +
-                        navLink.fields.navItemLogo.fields.file.fileName
+                        "/" + navLink.fields.navItemLogo.fields.file.fileName
                       }
-                      alt={navLink.fields.navItemLogo.fields.title} 
-                      className="h-8 w-auto"  
+                      alt={navLink.fields.navItemLogo.fields.title}
+                      className='h-8 w-auto'
                     />
                   ) : null}
                 </a>
               </Link>
-          );
+            );
         })}
         </div>
       </footer>
