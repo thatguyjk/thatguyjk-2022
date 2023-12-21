@@ -7,8 +7,8 @@ export default function Home({featuredProjects}) {
   const [featured, setFeatured] = useState([]);
 
   useEffect(() => {
-    setFeatured(featuredProjects);
-    console.log('featured', featuredProjects);
+    // setFeatured(featuredProjects);
+    // console.log('featured', featuredProjects);
   }, [featuredProjects]);
 
   const FeaturedProject = ({details}) => {
@@ -50,10 +50,10 @@ export default function Home({featuredProjects}) {
 
 export async function getStaticProps() {
   const featuredProjects = await getFeaturedProjects();
-  console.log(featuredProjects);
+  // console.log(featuredProjects);
   return {
     props: {
-      featuredProjects,
+      featuredProjects: [],
     },
   };
 }
