@@ -4,7 +4,7 @@ Every year (well, almost every) I like to take the time to apply a fresh coat of
 
 #### Technology used in the creation of this website
 
-- React/NextJS
+- React, NextJS, Contentful
 
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
