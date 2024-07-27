@@ -1,9 +1,7 @@
-import { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import {
-   getAboutContent } from '../lib/api';
+import { getAboutContent } from '../lib/api';
 
 function About({aboutContent}) {
   const Bold = ({classes, children}) => <b className={classes}>{children}</b>;
@@ -18,7 +16,7 @@ function About({aboutContent}) {
       [MARKS.CODE]: text => <Code classes="">{ text }</Code>
     },
     renderNode: {
-      [BLOCKS.PARAGRAPH]: (node, children) => <Text classes="text-2xl mb-4">{ children }</Text>,
+      [BLOCKS.PARAGRAPH]: (node, children) => <Text classes="text-lg mb-4">{ children }</Text>,
       [INLINES.HYPERLINK]: ({data}, children) => <a className="text-red" href={data.uri} target="_blank" rel="noopener noreferrer">{children}</a>
     }
   }

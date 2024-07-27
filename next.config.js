@@ -9,7 +9,7 @@ const nextConfig = {
   },
   images: {
     loader: 'akamai',
-    path: '',
+    path: './public/',
   },
   env: {
     CONTENTFUL_SPACE_ID: process.env.CONTENTFUL_SPACE_ID,
