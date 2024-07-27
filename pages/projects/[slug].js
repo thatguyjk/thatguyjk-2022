@@ -1,20 +1,11 @@
-import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { getAllProjects } from "../../lib/api";
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
-import { gsap } from "gsap";
+// import { gsap } from "gsap";
 
-export default function Project({project}) {
-    const [createdAt, setCreatedAt] = useState("");
-    const [projectYear, setProjectYear] = useState('');
-    const [description, setDescription] = useState(null);
-    const [techStack, setTechStack] = useState([]);
-    const [title, setTitle] = useState([]);
-    const [url, setUrl] = useState("");
-    const [projectImages, setImages] = useState([]);
-    
+export default function Project({createdAt, projectYear, description, techStack, title, url, projectImages}) {
     const route = useRouter();
 
     const Bold = ({children}) => <b>{children}</b>;
@@ -34,20 +25,10 @@ export default function Project({project}) {
       }
     }
 
-    useEffect(() => {
-      setCreatedAt(project.fields?.createdAt);
-      setProjectYear(project.fields?.projectYear);
-      setDescription(project.fields?.description);
-      setTechStack(project.fields?.techStack);
-      setTitle(project.fields?.title);
-      setUrl(project.fields?.url);
-      setImages(project.fields?.projectImages);
-    }, [project]);
-
     return (
       <>
         <Head key='title'>
-          <title>ThatGuyJK - Projects - {title}</title>
+          <title>ThatGuyJK - Projects - {title ? title : null}</title>
         </Head>
         <article className='py-16 min-h-screen'>
           <section className='flex flex-row flex-wrap items-baseline justify-between mb-6'>
@@ -65,29 +46,29 @@ export default function Project({project}) {
             <div className='grid auto-rows-auto gap-4 font-nunito md:border-l-2 md:border-l-black md:pl-3'>
               <div className='break-all'>
                 <h6 className='underline underline-offset-4 text-xl font-bold'>Developed At</h6>
-                <p className='text-lg'>{createdAt}&nbsp;{ projectYear ? '('+projectYear+')' : null}</p>
+                <p className='text-lg'>{createdAt ? createdAt : null}&nbsp;{ projectYear ? '('+projectYear+')' : null}</p>
               </div>
 
               <div className='break-all'>
                 <h6 className='underline underline-offset-4 text-xl font-bold'>Technology Used</h6>
                 <ul>
-                  {techStack.map((tech, id) => {
-                    return <li key={id} className='text-sm font-semibold bg-carbon p-1 rounded-sm inline-block mr-2 mt-1'>{tech}</li>;
+                  {techStack && techStack.map((tech, id) => {
+                    return <li key={id} className='text-sm font-semibold bg-carbon p-1 rounded-sm inline-block mr-2 mt-1'>{tech ? tech : null}</li>;
                   })}
                 </ul>
               </div>
 
               <div className='break-all'>
                 <h6 className='underline underline-offset-4 text-xl font-bold'>Project URL</h6>
-                <a className="hover:text-red" href={url} target='_blank' rel='noreferrer'>
-                  {url}
+                <a className="hover:text-red" href={url && url.includes("[offline]") ? '#' : url} target='_blank' rel='noreferrer'>
+                  {url ? url : 'Not Available'}
                 </a>
               </div>
             </div>
           </section>
           
           <section className='columns-1 md:columns-2 items-start'>
-          {projectImages.map((prjImg, imgId) => {
+          {projectImages && projectImages.map((prjImg, imgId) => {
               return (
                 <figure key={imgId} className="mb-4">
                   <img
@@ -139,7 +120,13 @@ export async function getStaticProps({params}) {
 
   return {
     props: {
-      project: portfolioItem[0],
+      createdAt: portfolioItem[0].fields?.createdAt,
+      projectYear: portfolioItem[0].fields?.projectYear,
+      description: portfolioItem[0].fields?.description,
+      techStack: portfolioItem[0].fields?.techStack,
+      title: portfolioItem[0].fields?.title,
+      url: portfolioItem[0].fields?.url,
+      projectImages: portfolioItem[0].fields?.projectImages,
     },
   };
 }

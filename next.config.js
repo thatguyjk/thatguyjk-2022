@@ -4,12 +4,15 @@ const path = require("path");
 const nextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
+  images: {
+    unoptimized: true,
+  },
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
   },
   images: {
     loader: 'akamai',
-    path: '',
+    path: './public/',
   },
   env: {
     CONTENTFUL_SPACE_ID: process.env.CONTENTFUL_SPACE_ID,

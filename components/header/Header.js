@@ -42,14 +42,22 @@ export default function Header() {
         <div className={'grid grid-cols-'+ headerNavLinks.length +' gap-3 justify-self-end'}>
           {headerNavLinks.map((navLink) => {
             return (
-              <div className="inline-block py-3 font-nunito" key={navLink.fields.navItemName}>
-                <Link href={navLink.fields.navItemUrl}>
-                  <a className={matchingPath(navLink.fields.navItemName) ? 'text-red' : 'text-white hover:text-red'}>  
+              <div
+                className='inline-block py-3 font-nunito'
+                key={navLink.fields.navItemName}
+              >
+                <Link legacyBehavior href={navLink.fields.navItemUrl}>
+                  <a
+                    className={
+                      matchingPath(navLink.fields.navItemName)
+                        ? "text-red"
+                        : "text-white hover:text-red"
+                    }
+                  >
                     {navLink.fields?.navItemLogo?.fields?.file?.fileName ? (
                       <Image
                         src={
-                          "https:" +
-                          navLink.fields.navItemLogo.fields.file.url
+                          "https:" + navLink.fields.navItemLogo.fields.file.url
                         }
                         alt={navLink.fields.navItemLogo.fields.title}
                         width={
