@@ -1,10 +1,11 @@
 import { Html, Head, Main, NextScript } from 'next/document'
+import Script from 'next/script';
 
 export default function Document() {
   return (
     <Html className='scroll-smooth'>
         <Head>
-          <script async src="https://www.googletagmanager.com/gtag/js?id=G-3HNV4JX0KR" />
+          <Script src="https://www.googletagmanager.com/gtag/js?id=G-3HNV4JX0KR" />
           <script dangerouslySetInnerHTML={{
               __html: `
             window.dataLayer = window.dataLayer || [];

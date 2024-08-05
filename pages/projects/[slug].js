@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import Image from 'next/image';
 import { getAllProjects } from "../../lib/api";
 import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types';
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
@@ -71,8 +72,8 @@ export default function Project({createdAt, projectYear, description, techStack,
           {projectImages && projectImages.map((prjImg, imgId) => {
               return (
                 <figure key={imgId} className="mb-4">
-                  <img
-                    src={"/" + prjImg.fields?.file.fileName}
+                  <Image
+                    src={'/' + prjImg.fields?.file.fileName}
                     alt={prjImg.fields?.title}
                     layout='intrinsic'
                     width={prjImg.fields?.file?.details?.image?.width}
@@ -104,7 +105,7 @@ export async function getStaticPaths() {
 
     return { 
         paths,
-        fallback: true,
+        fallback: false,
     }
 }
 
