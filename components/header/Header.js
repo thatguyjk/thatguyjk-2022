@@ -3,7 +3,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from 'next/router';
 import { getHeaderLinks } from "../../lib/api";
-import styles from './Header.module.scss';
 
 export default function Header() {
   const [headerNavLinks, setHeaderNavLinks] = useState([]);
