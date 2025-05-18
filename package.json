@@ -6,7 +6,8 @@
     "assets": "node lib/dlAssets.js",
     "dev": "next dev",
     "build": "node lib/dlAssets.js && next build",
-    "start": "node lib/dlAssets.js && npx serve@latest out",
+    "start": "node lib/dlAssets.js && next start",
+    "faststart": "npx serve@latest out",
     "lint": "next lint"
   },
   "dependencies": {

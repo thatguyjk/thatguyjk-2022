@@ -1,59 +1,77 @@
-import { useState, useEffect } from 'react';
-import Head from 'next/head';
-import Link from 'next/link';
-import { getFeaturedProjects } from "../lib/api";
+import Head from "next/head";
+import FeaturedProject from "../components/FeaturedProject";
+import Image from "next/image";
+import { getFeaturedProjects, getHomePageAboutContent } from "../lib/api";
 
-export default function Home({featuredProjects}) {
-  const [featured, setFeatured] = useState([]);
+import { nunito, roboto } from "../styles/fonts";
 
-  useEffect(() => {
-    // setFeatured(featuredProjects);
-    // console.log('featured', featuredProjects);
-  }, [featuredProjects]);
-
-  const FeaturedProject = ({details}) => {
-    return  (
-      <Link href={'projects/'+details.fields.slug}>
-        <li className="relative transition-color text-xl text-center md:text-5xl px-3 aspect-[4/3] h-32 md:h-96 w-full flex justify-center items-center cursor-pointer hover:text-white">
-            <span className='transition-opacity pointer-events-auto w-full h-full absolute inset-0 opacity-0 hover:opacity-100' style={{'backgroundColor': details.fields.primaryColor}}></span>
-            <span className='z-10 pointer-events-none'>{details.fields.title}</span>
-        </li>
-      </Link>
-    )
-  }
-
+export default function Home({ featuredProjects, aboutContent }) {
   return (
-    <div className="container">
+    <div className='container'>
       <Head>
-        <title key='title'>The portfolio of Jonathan &quot;ThatGuyJK&quot; Kelly</title>
-        <link rel="icon" href="/favicon.ico" />
+        <title key='title'>
+          The portfolio of Jonathan &quot;ThatGuyJK&quot; Kelly
+        </title>
+        <link rel='icon' href='/favicon.ico' />
       </Head>
 
-      <main className='flex flex-col justify-center items-center pb-0 min-h-[calc(100vh-3.5rem)]'>
-        <section className='text-center'>
-          <h1 className='text-4xl mb-3 lg:text-7xl'>Jonathan &lsquo;ThatGuyJK&rsquo; Kelly</h1>
-          <h2 className='font-nunito text-2xl mb-3 lg:text-5xl'>Software Engineer / Web Developer</h2>
-        </section>
-        <ul className='grid grid-cols-1 md:grid-cols-2 justify-items-center items-center'>
-            {
-              featured.map((prj, index) => {
-                  return (
-                    <FeaturedProject details={prj} key={index} />
-                  );
-                }) 
-            }
-        </ul>
+      <main>
+        <div
+          className={`flex flex-col justify-between items-center pb-8 min-h-[100dvh] ${nunito.className}`}
+        >
+          <section className='text-center mt-auto pt-32'>
+            <h1 className='text-4xl mb-3 lg:text-7xl'>
+              Jonathan &lsquo;ThatGuyJK&rsquo; Kelly
+            </h1>
+            <h2 className={`${nunito.className} text-2xl mb-3 lg:text-5xl`}>
+              Software Engineer / Web Developer
+            </h2>
+          </section>
+          <div className='mt-auto mb-8'>
+            <Image
+              src='/down-arrow.svg'
+              alt='Scroll Down'
+              width={32}
+              height={32}
+              className='animate-bounce'
+              priority
+            />
+          </div>
+        </div>
+
+        <div className='text-justify my-32'>
+          <div className='max-w-4xl mx-auto'>
+            <p
+              className={`text-3xl mb-8 text-pretty md:text-balance ${roboto.className}`}
+            >
+              {aboutContent}
+            </p>
+          </div>
+        </div>
+
+        <div className='text-center'>
+          <h1 className={`text-5xl mb-5 ${nunito.className}`}>
+            Featured Projects
+          </h1>
+          <ul className='grid grid-cols-1 justify-items-center items-center mb-8 md:grid-cols-2'>
+            {featuredProjects.map((prj, index) => {
+              return <FeaturedProject details={prj} key={index} />;
+            })}
+          </ul>
+        </div>
       </main>
     </div>
-  )
+  );
 }
 
 export async function getStaticProps() {
   const featuredProjects = await getFeaturedProjects();
-  // console.log(featuredProjects);
+  const aboutContent = await getHomePageAboutContent();
+
   return {
     props: {
-      featuredProjects: [],
+      featuredProjects: featuredProjects,
+      aboutContent: aboutContent,
     },
   };
 }
