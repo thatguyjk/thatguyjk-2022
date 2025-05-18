@@ -6,12 +6,14 @@ import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 // import { gsap } from "gsap";
 
+import { nunito, roboto } from "../../styles/fonts";
+
 export default function Project({
   createdAt,
   projectYear,
   description,
   techStack,
-  title,
+  pageTitle,
   url,
   projectImages,
 }) {
@@ -48,14 +50,18 @@ export default function Project({
   return (
     <>
       <Head key='title'>
-        <title>ThatGuyJK - Projects - {title ? title : null}</title>
+        <title>{`ThatGuyJK - Projects - ${
+          pageTitle ? pageTitle : null
+        }`}</title>
       </Head>
       <article className='py-16 min-h-screen'>
         <section className='flex flex-row flex-wrap items-baseline justify-between mb-6'>
-          <h1 className='font-roboto text-4xl md:text-5xl'>{title}</h1>
+          <h1 className={`${roboto.className} text-4xl md:text-5xl`}>
+            {pageTitle}
+          </h1>
           <button
             type='button'
-            className='font-nunito'
+            className={nunito.className}
             onClick={() => route.push("/projects")}
           >
             Go Back
@@ -63,7 +69,7 @@ export default function Project({
         </section>
 
         <section className='grid gap-3 mb-8 md:grid-cols-2'>
-          <div className='font-nunito'>
+          <div className={nunito.className}>
             {documentToReactComponents(description, options)}
           </div>
 
@@ -101,14 +107,20 @@ export default function Project({
               <h6 className='underline underline-offset-4 text-xl font-bold'>
                 Project URL
               </h6>
-              <a
-                className='hover:text-red'
-                href={url && url.includes("[offline]") ? "#" : url}
-                target='_blank'
-                rel='noreferrer'
-              >
-                {url ? url : "Not Available"}
-              </a>
+              {url && url.includes("[offline]") ? (
+                <p className='text-sm font-semibold p-1 rounded-sm inline-block mr-2 mt-1'>
+                  This project is currently offline
+                </p>
+              ) : (
+                <a
+                  className='hover:text-red'
+                  href={url}
+                  target='_blank'
+                  rel='noreferrer'
+                >
+                  {url}
+                </a>
+              )}
             </div>
           </div>
         </section>
@@ -165,13 +177,13 @@ export async function getStaticProps({ params }) {
 
   return {
     props: {
-      createdAt: portfolioItem[0].fields?.createdAt,
-      projectYear: portfolioItem[0].fields?.projectYear,
+      createdAt: portfolioItem[0].fields?.createdAt ?? null,
+      projectYear: portfolioItem[0].fields?.projectYear ?? null,
       description: portfolioItem[0].fields?.description,
-      techStack: portfolioItem[0].fields?.techStack,
-      title: portfolioItem[0].fields?.title,
-      url: portfolioItem[0].fields?.url,
-      projectImages: portfolioItem[0].fields?.projectImages,
+      techStack: portfolioItem[0].fields?.techStack ?? null,
+      pageTitle: portfolioItem[0].fields?.title ?? null,
+      url: portfolioItem[0].fields?.url ?? null,
+      projectImages: portfolioItem[0].fields?.projectImages ?? null,
     },
   };
 }
