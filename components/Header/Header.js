@@ -1,23 +1,25 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from 'next/router';
-import { getHeaderLinks } from "../../lib/api";
-import styles from './Header.module.scss';
+import { useRouter } from "next/router";
+import { getHeaderLinks } from "@/lib/api";
+
+import { nunito } from "@/styles/fonts";
 
 export default function Header() {
   const [headerNavLinks, setHeaderNavLinks] = useState([]);
-  const [currRoute, setCurrRoute] = useState('');
+  const [currRoute, setCurrRoute] = useState("");
   const router = useRouter();
 
   useEffect(() => {
     const fetchHeaderLinks = async () => {
       const headerLinks = await getHeaderLinks();
 
-      headerLinks && headerLinks.forEach((link) => {
-        delete link["metadata"];
-        delete link["sys"];
-      });
+      headerLinks &&
+        headerLinks.forEach((link) => {
+          delete link["metadata"];
+          delete link["sys"];
+        });
 
       setHeaderNavLinks(headerLinks);
     };
@@ -30,20 +32,30 @@ export default function Header() {
   }, [router]);
 
   const matchingPath = (linkName) => {
-    if(currRoute === '/' && linkName === 'Home') return true;
+    if (currRoute === "/" && linkName === "Home") return true;
 
     return currRoute.includes(linkName.toLowerCase());
-  }
+  };
 
   return (
     <>
-      <nav className="bg-black/90 text-white backdrop-blur-md backdrop-opacity-60 fixed z-40 w-full shadow-lg mb-3.5 grid grid-rows-1 grid-cols-2 grid-flow-row-dense items-center px-12">
-        <div className="justify-self-start font-nunito font-extrabold uppercase"><Link href="/">THATGUYJK</Link></div>
-        <div className={'grid grid-cols-'+ headerNavLinks.length +' gap-3 justify-self-end'}>
+      <nav className='bg-black/70 text-white backdrop-blur-sm fixed z-40 w-full shadow-lg mb-3.5 grid grid-rows-1 grid-cols-2 grid-flow-row-dense items-center px-12 '>
+        <div
+          className={`justify-self-start ${nunito.className} font-extrabold uppercase`}
+        >
+          <Link href='/'>THATGUYJK</Link>
+        </div>
+        <div
+          className={
+            "grid grid-cols-" +
+            headerNavLinks.length +
+            " gap-3 justify-self-end"
+          }
+        >
           {headerNavLinks.map((navLink) => {
             return (
               <div
-                className='inline-block py-3 font-nunito'
+                className={`inline-block py-3 ${nunito.className}`}
                 key={navLink.fields.navItemName}
               >
                 <Link legacyBehavior href={navLink.fields.navItemUrl}>
@@ -76,7 +88,7 @@ export default function Header() {
               </div>
             );
           })}
-          </div>
+        </div>
       </nav>
     </>
   );
