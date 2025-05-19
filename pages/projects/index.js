@@ -1,8 +1,8 @@
 import Head from "next/head";
 import Link from "next/link";
-import { getAllProjects } from "../../lib/api";
+import { getAllProjects } from "@/lib/api";
 
-import { nunito, roboto } from "../../styles/fonts";
+import { nunito, roboto } from "@/styles/fonts";
 
 function Projects({ projects }) {
   return (

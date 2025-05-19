@@ -1,9 +1,10 @@
 import Head from "next/head";
-import FeaturedProject from "../components/FeaturedProject";
+import FeaturedProject from "@/components/FeaturedProject";
 import Image from "next/image";
-import { getFeaturedProjects, getHomePageAboutContent } from "../lib/api";
+import Link from "next/link";
+import { getFeaturedProjects, getHomePageAboutContent } from "@/lib/api";
 
-import { nunito, roboto } from "../styles/fonts";
+import { nunito, roboto } from "@/styles/fonts";
 
 export default function Home({ featuredProjects, aboutContent }) {
   return (
@@ -57,6 +58,11 @@ export default function Home({ featuredProjects, aboutContent }) {
             {featuredProjects.map((prj, index) => {
               return <FeaturedProject details={prj} key={index} />;
             })}
+            <li>
+              <Link href={"projects/"} className='w-full text-xl md:text-5xl'>
+                View More...
+              </Link>
+            </li>
           </ul>
         </div>
       </main>

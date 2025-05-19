@@ -1,20 +1,15 @@
 import Head from "next/head";
+import Bold from "@/components/BoldText";
+import Italic from "@/components/ItalicText";
+import Text from "@/components/Text";
+import Code from "@/components/CodeText";
 import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
-import { getAboutContent } from "../lib/api";
+import { getAboutContent } from "@/lib/api";
 
-import { nunito } from "../styles/fonts";
+import { nunito } from "@/styles/fonts";
 
 function About({ aboutContent }) {
-  const Bold = ({ classes, children }) => <b className={classes}>{children}</b>;
-  const Text = ({ classes, children }) => <p className={classes}>{children}</p>;
-  const Italic = ({ classes, children }) => (
-    <em className={classes}>{children}</em>
-  );
-  const Code = ({ classes, children }) => (
-    <code className={classes}>{children}</code>
-  );
-
   const options = {
     renderMark: {
       [MARKS.BOLD]: (text) => <Bold classes=''>{text}</Bold>,
