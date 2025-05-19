@@ -1,12 +1,16 @@
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Image from "next/image";
-import { getAllProjects } from "../../lib/api";
+import Bold from "@/components/BoldText";
+import Italic from "@/components/ItalicText";
+import Text from "@/components/Text";
+import Code from "@/components/CodeText";
+import { getAllProjects } from "@/lib/api";
 import { BLOCKS, INLINES, MARKS } from "@contentful/rich-text-types";
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer";
 // import { gsap } from "gsap";
 
-import { nunito, roboto } from "../../styles/fonts";
+import { nunito, roboto } from "@/styles/fonts";
 
 export default function Project({
   createdAt,
@@ -18,11 +22,6 @@ export default function Project({
   projectImages,
 }) {
   const route = useRouter();
-
-  const Bold = ({ children }) => <b>{children}</b>;
-  const Text = ({ children }) => <p>{children}</p>;
-  const Italic = ({ children }) => <em>{children}</em>;
-  const Code = ({ children }) => <code>{children}</code>;
 
   const options = {
     renderMark: {
@@ -73,7 +72,9 @@ export default function Project({
             {documentToReactComponents(description, options)}
           </div>
 
-          <div className='grid auto-rows-auto gap-4 font-nunito md:border-l-2 md:border-l-black md:pl-3'>
+          <div
+            className={`grid auto-rows-auto gap-4 ${nunito.className} md:border-l-2 md:border-l-black md:pl-3`}
+          >
             <div className='break-all'>
               <h6 className='underline underline-offset-4 text-xl font-bold'>
                 Developed At

@@ -6,7 +6,7 @@ const roboto = Roboto({
   weight: ["400", "700"],
 });
 
-export default function FeaturedProject({ details }) {
+export function FeaturedProject({ details }) {
   return (
     <Link href={"projects/" + details.fields.slug} className='w-full'>
       <li className='relative transition-color text-xl text-center md:text-5xl px-3 aspect-[4/3] h-32 md:h-96 w-full flex justify-center items-center cursor-pointer hover:text-white'>

@@ -1,3 +1,3 @@
-import FeaturedProject from "./FeaturedProject";
+import { FeaturedProject } from "./FeaturedProject";
 
 export default FeaturedProject;

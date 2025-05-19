@@ -16,6 +16,8 @@ const nextConfig = {
     CONTENTFUL_ACCESS_TOKEN: process.env.CONTENTFUL_ACCESS_TOKEN,
   },
   webpack: (config, { isServer }) => {
+    config.resolve.alias["@"] = path.resolve(__dirname);
+
     if (!isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,
