@@ -29,18 +29,20 @@ export default function Home({ featuredProjects, aboutContent }) {
             </h2>
           </section>
           <div className='mt-auto mb-8'>
-            <Image
-              src='/down-arrow.svg'
-              alt='Scroll Down'
-              width={32}
-              height={32}
-              className='animate-bounce'
-              priority
-            />
+            <Link href='#homePageAbout'>
+              <Image
+                src='/down-arrow.svg'
+                alt='Scroll Down'
+                width={32}
+                height={32}
+                className='animate-bounce'
+                priority
+              />
+            </Link>
           </div>
         </div>
 
-        <div className='text-justify my-32'>
+        <div id='homePageAbout' className='text-justify my-32 scroll-mt-32'>
           <div className='max-w-4xl mx-auto'>
             <p
               className={`text-3xl mb-8 text-pretty md:text-balance ${roboto.className}`}
