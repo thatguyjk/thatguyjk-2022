@@ -5,7 +5,7 @@ export function Layout({ children }) {
   return (
     <div className='bg-offwhite'>
       <Header />
-      <section className='px-3 md:px-12'>
+      <section className='px-0 lg:px-12'>
         <main>{children}</main>
       </section>
       <Footer />

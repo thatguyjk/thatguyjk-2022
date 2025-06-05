@@ -11,7 +11,9 @@ function Projects({ projects }) {
         <title>ThatGuyJK - Projects</title>
       </Head>
       <article className='py-16 min-h-screen'>
-        <h5 className={`mb-8 text-4xl ${nunito.className}`}>
+        <h5
+          className={`text-center lg:text-left mb-8 text-4xl ${nunito.className}`}
+        >
           Selected Projects
         </h5>
         <ul className='grid grid-cols-1 md:grid-cols-2 justify-items-center items-center'>

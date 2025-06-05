@@ -8,7 +8,7 @@ import { nunito, roboto } from "@/styles/fonts";
 
 export default function Home({ featuredProjects, aboutContent }) {
   return (
-    <div className='container'>
+    <div className='lg:container w-full sm:mx-0 lg:mx-12'>
       <Head>
         <title key='title'>
           The portfolio of Jonathan &quot;ThatGuyJK&quot; Kelly
@@ -42,10 +42,10 @@ export default function Home({ featuredProjects, aboutContent }) {
           </div>
         </div>
 
-        <div id='homePageAbout' className='text-justify my-32 scroll-mt-32'>
+        <div id='homePageAbout' className='my-32 scroll-mt-32'>
           <div className='max-w-4xl mx-auto'>
             <p
-              className={`text-3xl mb-8 text-pretty md:text-balance ${roboto.className}`}
+              className={`text-3xl mb-8 text-center mx-8 lg:mx-0 lg:text-pretty ${roboto.className}`}
             >
               {aboutContent}
             </p>

@@ -67,13 +67,13 @@ export default function Project({
           </button>
         </section>
 
-        <section className='grid gap-3 mb-8 md:grid-cols-2'>
+        <section className='grid gap-3 mb-8 grid-cols-1 lg:grid-cols-2'>
           <div className={nunito.className}>
             {documentToReactComponents(description, options)}
           </div>
 
           <div
-            className={`grid auto-rows-auto gap-4 ${nunito.className} md:border-l-2 md:border-l-black md:pl-3`}
+            className={`grid auto-rows-auto gap-4 ${nunito.className} lg:border-l-2 lg:border-l-black lg:pl-3`}
           >
             <div className='break-all'>
               <h6 className='underline underline-offset-4 text-xl font-bold'>
