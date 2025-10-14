@@ -3,12 +3,20 @@ import { createClient } from "contentful";
 const accessToken = process.env.CONTENTFUL_ACCESS_TOKEN;
 const space = process.env.CONTENTFUL_SPACE_ID;
 
-const constants = require("./CMS_CONSTANTS");
+if (!accessToken) {
+  throw new Error("CONTENTFUL_ACCESS_TOKEN environment variable is not set");
+}
+
+if (!space) {
+  throw new Error("CONTENTFUL_SPACE_ID environment variable is not set");
+}
 
 const client = createClient({
-  accessToken: accessToken,
-  space: space,
+  accessToken: accessToken as string,
+  space: space as string,
 });
+
+const constants = require("./CMS_CONSTANTS");
 
 export async function getHeaderLinks() {
   let headerLinks = await client
@@ -40,10 +48,9 @@ export async function getAboutContent() {
   let aboutContent = await client
     .getEntry(constants.ABOUT_CONTENT)
     .then((entry) => {
-      delete entry["metadata"];
-      delete entry["sys"];
+      const { metadata, sys, ...rest } = entry;
 
-      return entry.fields.aboutContent;
+      return rest.fields.aboutContent;
     });
 
   return aboutContent;
@@ -53,10 +60,9 @@ export async function getHomePageAboutContent() {
   let aboutContent = await client
     .getEntry(constants.HOME_PAGE_ABOUT_CONTENT)
     .then((entry) => {
-      delete entry["metadata"];
-      delete entry["sys"];
+      const { metadata, sys, ...rest } = entry;
 
-      return entry.fields.paragraphContent;
+      return rest.fields.paragraphContent;
     });
 
   return aboutContent;
@@ -66,10 +72,9 @@ export async function getFeaturedProjects() {
   let featured = await client
     .getEntries(constants.FEATURED_PROJECTS)
     .then((data) => {
-      delete data["metadata"];
       delete data["sys"];
 
-      data = data.items.filter((el) => {
+      data.items = data.items.filter((el) => {
         return el.fields.featuredProject === true;
       });
 
@@ -86,7 +91,6 @@ export async function getAllProjects() {
   let projects = await client
     .getEntries(constants.ALL_PROJECTS)
     .then((data) => {
-      delete data["metadata"];
       delete data["sys"];
 
       return data;
