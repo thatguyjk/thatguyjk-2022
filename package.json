@@ -4,17 +4,17 @@
   "private": true,
   "scripts": {
     "assets": "node lib/dlAssets.js",
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "node lib/dlAssets.js && next build",
     "start": "node lib/dlAssets.js && next start",
     "faststart": "npx serve@latest out",
     "lint": "next lint"
   },
   "dependencies": {
-    "@contentful/rich-text-html-renderer": "^17.0.0",
-    "@contentful/rich-text-react-renderer": "^16.0.1",
-    "@contentful/rich-text-types": "^17.0.0",
-    "@next/third-parties": "15.5.5",
+    "@contentful/rich-text-html-renderer": "^17.1.5",
+    "@contentful/rich-text-react-renderer": "^16.1.5",
+    "@contentful/rich-text-types": "^17.2.4",
+    "@next/third-parties": "15.0.2",
     "buffer": "^6.0.3",
     "contentful": "^11.5.22",
     "dotenv": "^16.4.5",
@@ -34,6 +34,7 @@
     "webp-loader": "^0.6.0"
   },
   "devDependencies": {
+    "@types/react": "19.2.2",
     "autoprefixer": "^10.4.20",
     "cssnano": "^7.0.6",
     "eslint": "9.13.0",
@@ -41,6 +42,7 @@
     "postcss": "^8.4.47",
     "sass": "^1.80.5",
     "tailwindcss": "^3.4.14",
+    "typescript": "5.9.3",
     "webpack": "^5.95.0"
   }
 }

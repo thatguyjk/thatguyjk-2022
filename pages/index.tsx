@@ -57,7 +57,7 @@ export default function Home({ featuredProjects, aboutContent }) {
             Featured Projects
           </h1>
           <ul className='grid grid-cols-1 justify-items-center items-center mb-8 md:grid-cols-2'>
-            {featuredProjects.map((prj, index) => {
+            {featuredProjects?.items?.map((prj, index) => {
               return <FeaturedProject details={prj} key={index} />;
             })}
             <li>
@@ -78,8 +78,8 @@ export async function getStaticProps() {
 
   return {
     props: {
-      featuredProjects: featuredProjects,
-      aboutContent: aboutContent,
+      featuredProjects: featuredProjects || { items: [] },
+      aboutContent: aboutContent || "",
     },
   };
 }
